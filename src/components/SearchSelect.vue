@@ -3,6 +3,7 @@
 	<div class="ui search dropdown selection" :class="{ 'active':showMenu, 'error': isError }">
 		<i class="dropdown icon" @click="openOptions"></i>
 		<input class="search" type="text" autocomplete="off" tabindex="0"
+		:id="inputId"
 		:required="isRequired"
 		v-model="searchText"
 		@focus="openOptions"
@@ -39,6 +40,10 @@
         default: false
       },
       'isRequired': {
+        type: Boolean,
+        default: false
+      },
+      'inputId': {
         type: Boolean,
         default: false
       }
