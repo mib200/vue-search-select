@@ -3,13 +3,14 @@
 	<div class="ui search dropdown selection" :class="{ 'active':showMenu, 'error': isError }">
 		<i class="dropdown icon" @click="openOptions"></i>
 		<input class="search" type="text" autocomplete="off" tabindex="0"
+		:required="isRequired"
 		v-model="searchText"
 		@focus="openOptions"
 		@blur="blurInput"
 		@keydown.up.stop.prevent="prevItem"
 		@keydown.down.stop.prevent="nextItem"
 		@keydown.enter.stop.prevent="enterItem" />
-		
+
 		<div class="text">{{selectedOption.text}}</div>
 		<div class="menu" :class="{ 'visible':showMenu }" tabindex="-1">
 			<template v-for="option in filteredOptions">
@@ -18,7 +19,6 @@
 		</div>
 	</div>
 </template>
-
 <script>
   import Vue from 'vue'
   
@@ -35,6 +35,10 @@
         default: () => {}
       },
       'isError': {
+        type: Boolean,
+        default: false
+      },
+      'isRequired': {
         type: Boolean,
         default: false
       }
@@ -66,7 +70,7 @@
         }
       },
       'triggerValue': function (val, oldVal) {
-//        console.log('reset trigger value changed')
+       console.log('reset trigger value changed')
 //        console.log(val)
         if (!val) {
           this.resetSelect()
@@ -150,9 +154,9 @@
       },
       selectItem (option) {
         this.searchText = ''; // reset text when select item
-		this.selectedOption.selected = false; // remove previous selection
+				this.selectedOption.selected = false; // remove previous selection
         this.selectedOption = option;
-		this.selectedOption.selected = true;
+				this.selectedOption.selected = true;
         this.closeOptions();
         this.onSelect(option);
       },
@@ -167,7 +171,6 @@
     }
   }
 </script>
-
 <style scoped>
 	/*!
    * # Semantic UI 2.1.7 - Dropdown
