@@ -45,7 +45,7 @@
       },
       'inputId': {
         type: Boolean,
-        default: false
+        default: String
       }
     },
     data () {
